@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <top>
+      <HBox spacing="20.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#HomeView" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="HOME" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font></Button>
+            <Button fx:id="shopBtn" mnemonicParsing="false" onAction="#ShopView" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="SHOP" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font></Button>
+            <Button fx:id="boardBtn" mnemonicParsing="false" onAction="#BoardView" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="BOARD" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font></Button>
+            <Button fx:id="membershipBtn" mnemonicParsing="false" onAction="#MembershipView" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="MEMBERSHIP" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font></Button>
+            <Label prefHeight="108.0" prefWidth="300.0" />
+            <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#LoginView" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="LOGIN" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font></Button>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </top>
+   <right>
+      <VBox prefWidth="310.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#SearchView" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: black;" text="SEARCH" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="cartBtn" mnemonicParsing="false" onAction="#CartView" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: black;" text="CART" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="topBtn" mnemonicParsing="false" onAction="#TopView" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: black;" text="TOP" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="bottomBtn" mnemonicParsing="false" onAction="#BottomView" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: black;" text="BOTTOM" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="fullscrBtn" mnemonicParsing="false" onAction="#FullScreen" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: black;" text="FULLSCR" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+         </padding>
+      </VBox>
+   </right>
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
