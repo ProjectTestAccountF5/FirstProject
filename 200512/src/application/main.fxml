@@ -27,7 +27,15 @@
                <font>
                   <Font name="System Bold" size="36.0" />
                </font></Button>
-            <Label fx:id="userLabel" prefHeight="108.0" prefWidth="300.0" />
+            <StackPane prefHeight="108.0" prefWidth="300.0">
+               <children>
+                  <TextField fx:id="userStateTxt" alignment="CENTER" editable="false" >
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </StackPane>
             <Label fx:id="logIOBtnLbl" prefHeight="108.0" prefWidth="300.0">
                <graphic>
                   <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#LoginView" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="LOGIN" textFill="WHITE">

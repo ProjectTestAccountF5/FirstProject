@@ -13,8 +13,8 @@ import javafx.scene.layout.GridPane;
 
 public class SelectDB {
 	final static String DRIVER = "org.sqlite.JDBC";
-	final static String DB = "jdbc:sqlite:src/DataBase/project.db"; //다른 PC에서의 DB경로 지정의 번거로움을 없애기 위해 상대적 DB경로 지정
-	//"jdbc:sqlite:C:/Users/khlee/Documents/카카오톡 받은 파일/디비/project.db";
+	final static String DB = "jdbc:sqlite:src/DataBase/project.db"; //jdbc:sqlite:C:/강민성 JAVA 취업반/JAVA강의/팀프로젝트/작업폴더/project.db
+
 	public void KeywordSearch(Parent root, String keyword, String orderStr, String searchCat, String priceOpt) {
 		try {
 			Class.forName(DRIVER);

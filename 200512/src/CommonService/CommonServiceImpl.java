@@ -2,6 +2,8 @@ package CommonService;
 
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -21,7 +24,7 @@ import javafx.stage.Popup;
 import javafx.stage.Window;
 
 public class CommonServiceImpl implements ICommonService{
-	static Boolean checked = false;
+	static private Boolean checked = false;
 	@FXML CheckBox notShowCheckBox;
 
 	@Override
@@ -38,14 +41,14 @@ public class CommonServiceImpl implements ICommonService{
 	}
 
 	@Override
-	public Popup showPopUp(Popup popup, Scene scene) {
+	public Popup showPopUp(Popup popup, Scene scene, String title) {
 		ScrollPane sp = new ScrollPane();
 		sp.setContent(Load("../application/PopUp.fxml"));
 		BorderPane container = new BorderPane();
         container.setStyle("-fx-background-color : white;");
         StackPane titleStackPane = new StackPane();
         titleStackPane.setStyle("-fx-background-color: steelblue;");
-        Text titlePopUp = new Text("ÆË¾÷Ã¢");
+        Text titlePopUp = new Text(title);
         titlePopUp.setFont(new Font(40));
         titlePopUp.setStyle("-fx-fill : white");
         titleStackPane.getChildren().add(titlePopUp);
@@ -104,4 +107,26 @@ public class CommonServiceImpl implements ICommonService{
 		return checked;
 	}
 
+	@Override
+	public boolean isEmpty(Map<String, TextField> txtFldMap, String[] txtFldIdArr) {
+		for(String txtFldId : txtFldIdArr) {
+			TextField txtFld = txtFldMap.get(txtFldId);
+			
+			if(txtFld.getText().isEmpty()) {
+				txtFld.requestFocus();
+				return true;
+			}
+		}
+		return false;
+	}
+	@Override
+	public Map<String, TextField> getTextFieldInfo(Parent root, String[] txtFldIdArr) {
+		Map<String, TextField> txtFldMap = new HashMap<String, TextField>();
+		
+		for(String txtFldId : txtFldIdArr) {
+			TextField txtFld = (TextField)root.lookup(txtFldId);
+			txtFldMap.put(txtFldId, txtFld);
+		}
+		return txtFldMap;
+	}
 }

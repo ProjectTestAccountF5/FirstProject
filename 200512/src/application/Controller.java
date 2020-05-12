@@ -8,34 +8,35 @@ import CommonService.ICommonService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
 	ICommonService comserv = new CommonServiceImpl();
-	public static String userState = "Guest";
+	public static String userState = null;
 	@FXML Button fullscrBtn;
-	@FXML Label userLabel;
-
+	@FXML TextField userStateTxt;
+	@FXML Button loginBtn;
 	private ScrollPane scrPane = new ScrollPane();
 	private Scene scene;
 	static Popup mainPopup = new Popup();
-
+	Parent root;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		UserLabelControl(userState);
+		UserTextFieldControl(userState);     
+		if(!userStateTxt.getText().contentEquals("GUEST")) {
+			loginBtn.setText("LOGOUT");
+		}
+			
 	}
 
 
@@ -48,6 +49,9 @@ public class Controller implements Initializable {
 		if(checked)
 			notPopup.hide();
 	}*/
+	public void setRoot(Parent root) {
+		this.root = root;
+	}
 	public void HomeView(ActionEvent e) {
 
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
@@ -56,15 +60,21 @@ public class Controller implements Initializable {
 
 		Parent root = (Parent)e.getSource();
 		scene = root.getScene();
-		mainPopup = comserv.showPopUp(mainPopup, scene);
+		mainPopup = comserv.showPopUp(mainPopup, scene,"팝업창1");
 	}
-	public void UserLabelControl(String user) {
-		userLabel = new Label();
-		userLabel.setText(user);
-		userLabel.setAlignment(Pos.CENTER);
-		userLabel.setFont(new Font(36.0));
-		userLabel.setStyle("-fx-font-style : System Bold;");
-		userLabel.setTextFill(Color.WHITE);
+	public void UserTextFieldControl(String user) {
+		if(userState==null){
+			userState="GUEST";
+		}
+		else {
+		userState = user;
+		}
+		System.out.println(userState);
+
+		userStateTxt.setText(userState);
+		userStateTxt.setStyle("-fx-background-color: null;-fx-text-fill: white;");
+		//usrTxt.setText(user);
+		//usrTxt.setStyle("-fx-background-color: null;-fx-text-fill: white;");
 	}
 	public void ShopView(ActionEvent e) {
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
@@ -92,14 +102,48 @@ public class Controller implements Initializable {
 		System.out.println(btn.getId());
 	}
 	public void MembershipView(ActionEvent e) {
-		Button btn = (Button)e.getSource();
-		System.out.println(btn.getId());
+		Parent root = comserv.getScene(e);
+		System.out.println("사용자 : " + userStateTxt.getText());
+		System.out.println(userStateTxt.getText().contentEquals("GUEST"));
+		if(userStateTxt.getText().contentEquals("GUEST")) {	
+			BorderPane bp = (BorderPane)root;
+			bp.setLeft(null);
+			bp.setCenter(comserv.Load("../MembershipFxml/loginform.fxml"));
+			bp.getScene().getWindow().sizeToScene();
+			return;
+		}
+		else{
+			Button btn = (Button)e.getSource();
+			System.out.println(btn.getId());
+			BorderPane bp = (BorderPane)root;
+			bp.setLeft(null);
+			bp.setCenter(comserv.Load("../MembershipFxml/mypage(main).fxml"));
+			bp.getScene().getWindow().sizeToScene();
+			return;
+		}
+
 	}
 	public void LoginView(ActionEvent e) {
 		Button btn = (Button)e.getSource();
 		System.out.println(btn.getId());
-
+		/*
+		 * Stage stage = new Stage(); Parent root =
+		 * comserv.Load("../MembershipFxml/loginform.fxml"); stage.setScene(new
+		 * Scene(root)); stage.show();
+		 */
+		BorderPane borderPane = (BorderPane)comserv.getScene(e);
+		borderPane.setLeft(null);
+		borderPane.setCenter(null);
+		borderPane.setBottom(null);
+		Parent centerScene = comserv.Load("../MembershipFxml/loginform.fxml");
+		borderPane.setCenter(centerScene);
+		if(userStateTxt.getText()!="GUEST") {
+			userState = "GUEST";
+			userStateTxt.setText(userState);
+			loginBtn.setText("LOGIN");
+		}
 	}
+
 	public void SearchView(ActionEvent e) {
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
 		borderPane.setLeft(null);
@@ -128,6 +172,10 @@ public class Controller implements Initializable {
 		Stage stage = (Stage) fullscrBtn.getScene().getWindow();
 		stage.setFullScreen(true);
 	}
-	
+	public void setUser(String user) {
+		System.out.println(user);
+		String state = user;
+		UserTextFieldControl(state);
+	}
 
 }
