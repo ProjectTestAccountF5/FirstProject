@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="1.7976931348623157E308" prefHeight="1910.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopView.ShopDetailsController">
+   <bottom>
+      <HBox prefHeight="513.0" prefWidth="600.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox>
+               <children>
+                  <HBox prefHeight="24.0" prefWidth="290.0">
+                     <children>
+                        <Label prefHeight="15.0" prefWidth="53.0" text="REVIEW">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="reviewBtn" alignment="CENTER" mnemonicParsing="false" onAction="#reviewProc" prefHeight="20.0" prefWidth="78.0" style="-fx-background-color: white; -fx-border-color: lightgray;" text="후기 작성">
+                           <font>
+                              <Font name="Malgun Gothic" size="11.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="130.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Label prefHeight="14.0" prefWidth="275.0" style="-fx-background-color: WHITE; -fx-border-color: LIGHTGRAY;">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="122.0" prefWidth="294.0">
+               <children>
+                  <HBox prefHeight="24.0" prefWidth="290.0">
+                     <children>
+                        <Label prefHeight="15.0" prefWidth="53.0" text="Q&amp;A">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="qnaBtn" alignment="CENTER" mnemonicParsing="false" onAction="#qnaProc" prefHeight="20.0" prefWidth="78.0" style="-fx-background-color: white; -fx-border-color: lightgray;" text="문의 작성">
+                           <font>
+                              <Font name="Malgun Gothic" size="11.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="130.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Label prefHeight="14.0" prefWidth="275.0" style="-fx-background-color: WHITE; -fx-border-color: LIGHTGRAY;">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></HBox>
+   </bottom>
+   <center>
+      <VBox alignment="CENTER" prefHeight="580.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="detailImgView" fitHeight="1111.0" fitWidth="763.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../DetailImg/wonderland%20스트라이프%20니트.jpg" />
+               </image>
+            </ImageView>
+         </children></VBox>
+   </center>
+   <top>
+      <VBox prefHeight="302.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <ImageView fx:id="prdImgView" fitHeight="262.0" fitWidth="316.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../ImgSource/TOP/wonderland%20스트라이프%20니트.jpg" />
+                     </image>
+                  </ImageView>
+                  <VBox prefHeight="262.0" prefWidth="361.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="45.0" prefWidth="323.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="prdName" text="wonderland 스트라이프 니트">
+                                 <font>
+                                    <Font name="Malgun Gothic" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="scoreLbl" text="★★☆" textFill="#eea032" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" prefWidth="323.0" spacing="20.0">
+                           <children>
+                              <ComboBox fx:id="colorCmb" prefWidth="150.0" promptText="Color" style="-fx-background-color: white; -fx-border-color: lightgray;" />
+                           </children>
+                        </HBox>
+                        <ComboBox fx:id="sizeCmb" prefWidth="150.0" promptText="Size" style="-fx-background-color: white; -fx-border-color: lightgray;" />
+                        <HBox prefHeight="41.0" prefWidth="323.0" spacing="35.0">
+                           <children>
+                              <ComboBox fx:id="qtyCmb" prefWidth="150.0" promptText="Quantity" style="-fx-background-color: white; -fx-border-color: lightgray;" />
+                              <Label fx:id="almoSoldOutLbl" style="-fx-background-color: white; -fx-border-color: darkred;" text="품절임박">
+                                 <font>
+                                    <Font name="Malgun Gothic" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="88.0" prefWidth="55.0" style="-fx-border-color: black;" text="Price">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <VBox prefHeight="200.0" prefWidth="130.0">
+                                 <children>
+                                    <Label fx:id="priceLbl" prefHeight="88.0" prefWidth="110.0" text="29,000">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="dcpriceLbl" prefHeight="88.0" prefWidth="110.0" text="→ 29,000">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="90.0" prefWidth="142.0" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="buyBtn" mnemonicParsing="false" onAction="#buyProc" prefHeight="38.0" prefWidth="173.0" style="-fx-background-color: black; -fx-border-color: black;" text="BUY" textFill="#f8f6f6">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="cartBtn" mnemonicParsing="false" onAction="#cartProc" prefHeight="38.0" prefWidth="173.0" style="-fx-background-color: WHITE; -fx-border-color: black;" text="CART">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding></VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>

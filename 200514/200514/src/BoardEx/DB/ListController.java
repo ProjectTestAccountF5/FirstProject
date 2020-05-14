@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import BoardEx.ReadController;
 import BoardEx.WriteController;
 import CommonService.CommonServiceImpl;
 import CommonService.ICommonService;
@@ -78,16 +79,17 @@ public class ListController implements Initializable{
 		
 	}
 public void setBoardState(int state) {
+	System.out.println("셋보드스테이트 진행");
 	BoardState = state;
 
 	IBoardDBManage boardDB = new BoardDBManageImpl();
 	List<String> DB = boardDB.ListProc();
 	List<String> numlst = new ArrayList<String>();
-	BorderPane bp = (BorderPane)root;
+	//BorderPane bp = (BorderPane)root;
 	switch (BoardState) {
 	
 	
-	case 1:
+	case 1:{
 		System.out.println("보드리스트를 호출하기위한 루트 " + root);
 	boardList =(TableView)root.lookup("#boardList");
 	System.out.println(boardList);
@@ -108,7 +110,7 @@ public void setBoardState(int state) {
 	viewListColumn.setCellValueFactory(cellData -> cellData.getValue().viewListProperty().asObject());
 	likeListColumn.setCellValueFactory(cellData -> cellData.getValue().likeListProperty().asObject());
 
-System.out.println(BoardState);
+System.out.println("리스트보드스테이트 : " + BoardState);
 
 
 
@@ -134,11 +136,14 @@ System.out.println(BoardState);
 				continue;
 			}
 	}
+	}
 	default:
 		break;
 	}
 	try {
+		System.out.println("여긴안오겠지");
 		GetTitleProc();
+		
 	} catch (NullPointerException e) {
 		System.out.println(BoardState);
 		System.out.println("빈공간");
@@ -170,7 +175,8 @@ public String GetTitleProc() {
 				return;
 			}
 			num= String.valueOf(row.getItem().numListProperty().getValue());
-			setBoardState(BoardState);
+			ReadController readctrler = new ReadController();
+			readctrler.setBoardstate(BoardState);
 			BorderPane borderPane = (BorderPane)rootv;
 			Parent root = comserv.Load("../BoardEx/BoardReadEx.fxml");
 			borderPane.setBottom(null);

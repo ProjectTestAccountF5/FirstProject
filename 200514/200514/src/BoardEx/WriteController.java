@@ -64,8 +64,6 @@ public class WriteController implements Initializable{
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
 		System.out.println("보드스테이트" + boardstate);
 		root = (Parent)borderPane;
-		IBoardDBManage borman = new BoardDBManageImpl();
-		borman.ListProc();
 		System.out.println("취소 : " + root);
 		BorderPane bp = (BorderPane)root;
 		bp.setLeft(null);

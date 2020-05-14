@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:controller="MemberShip.MemberShipController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="276.0" prefWidth="179.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="IdTxt" prefHeight="16.0" prefWidth="179.0" promptText="아이디 입력">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="NameTxt" promptText="이름 입력">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextField>
+            <PasswordField fx:id="PwTxt" promptText="비밀번호 입력">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </PasswordField>
+            <PasswordField fx:id="PwTxtre" promptText="비밀번호 재입력">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </PasswordField>
+            <TextField fx:id="PhoneNumberTxt" promptText="전화번호 입력">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="UserEmailTxt" promptText="이메일 입력">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextField>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" />
+   </padding>
+   <top>
+      <Label prefHeight="39.0" prefWidth="122.0" text="회원가입" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <left>
+      <VBox prefHeight="225.0" prefWidth="92.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="아이디">
+               <font>
+                  <Font name="Gulim" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="13.0" />
+               </VBox.margin>
+               
+            </Label>
+            <Label text="이름">
+               <font>
+                  <Font name="Gulim" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+            
+            <Label text="비밀번호">
+               <font>
+                  <Font name="Gulim" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="18.0" />
+               </VBox.margin>
+            </Label>
+            <Label prefHeight="15.0" prefWidth="101.0" text="비밀번호 확인">
+               <font>
+                  <Font name="Gulim" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="18.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="전화번호">
+               <font>
+                  <Font name="Gulim" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="18.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="이메일">
+               <font>
+                  <Font name="Gulim" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="18.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="14.0" />
+         </padding>
+      </VBox>
+   </left>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="310.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="MembershipBtn" onAction="#MemberShipProc" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="18.0" prefWidth="76.0" style="-fx-background-color: black;" text="회원가입" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="CancelBtn" onAction="#CancelProc" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="48.0" style="-fx-background-color: black;" text="취소" textAlignment="JUSTIFY" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
