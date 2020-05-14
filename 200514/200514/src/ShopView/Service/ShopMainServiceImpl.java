@@ -27,17 +27,15 @@ public class ShopMainServiceImpl implements ShopMainService{
 	@Override
 	public Parent OpenPrdDetails() {	//버튼 클릭시 실행
 		System.out.println("============MainService===========");
-		comServ =new CommonServiceImpl();
-		Stage prdDetails =new Stage();
 		 FXMLLoader loader = new FXMLLoader(getClass().getResource("../shopDetailsView.fxml"));
 		Parent form = null;
 		try {
+			System.out.println(loader.getLocation());
 			form = loader.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return form;
 	}
 	

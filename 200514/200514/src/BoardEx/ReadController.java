@@ -32,7 +32,7 @@ public class ReadController implements Initializable{
 	TextField titleTxt;
 	@FXML
 	Button rewriteBtn;
-	
+	private static int boardstate;
 	public void setRoot(Parent root) {
 		this.root = root;
 	}
@@ -45,6 +45,9 @@ public class ReadController implements Initializable{
 		readList = dbmanager.ReadProc();
 		titleTxt.setText(readList.get(2));
 		contentHtml.setHtmlText(readList.get(7));
+	}
+	public void setBoardstate(int boardstate) {
+		this.boardstate = boardstate;
 	}
 	public void RewriteProc(ActionEvent e) {
 		if(contentHtml.isDisable()) {
@@ -70,16 +73,20 @@ public class ReadController implements Initializable{
 		borderPane.setCenter(root);
 		Window window = borderPane.getScene().getWindow();
 		window.sizeToScene();
+		ListController lstctrler = new ListController();
+		lstctrler.setBoardState(1);
 	}
 	public void DeleteBoardProc(ActionEvent e) {
 		dbmanager.DeleteBoard(readnum);
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
 		Parent root = comserv.Load("../BoardEx/DB/BoardListEx.fxml");
-		borderPane.setTop(null);
-		borderPane.setBottom(null);
-		borderPane.setCenter(root);
-		Window window = borderPane.getScene().getWindow();
-		window.sizeToScene();
+		BorderPane bp = (BorderPane)root;
+		bp.setLeft(null);
+		bp.setCenter(comserv.Load("../BoardEx/DB/BoardListEx.fxml"));
+		bp.getScene().getWindow().sizeToScene();
+		ListController lstctrler =new ListController();
+		lstctrler.setRoot(root);
+		lstctrler.setBoardState(boardstate);
 	}
 	
 	public void UpdateBoardProc(ActionEvent e) {

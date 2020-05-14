@@ -37,7 +37,7 @@ public class BoardDBManageImpl implements IBoardDBManage {
 
 	@Override
 	public boolean BoardProc(Board board) {
-		String sql = "INSERT INTO Board " + "(tag, title, writer, date, view, like, content) " + "VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO Board " + "(tag, title, writer, date, view, like, content, boardstate) " + "VALUES (?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -48,6 +48,7 @@ public class BoardDBManageImpl implements IBoardDBManage {
 			pStmt.setInt(5, board.getView());
 			pStmt.setInt(6, board.getLike());
 			pStmt.setString(7, board.getContent());
+			pStmt.setInt(8, board.getBoardstate());
 
 			pStmt.executeUpdate();
 
@@ -86,6 +87,7 @@ public class BoardDBManageImpl implements IBoardDBManage {
 				board.setView(rs.getInt("view"));
 				board.setLike(rs.getInt("like"));
 				board.setContent(rs.getString("content"));
+				board.setBoardstate(rs.getInt("boardstate"));
 				DBarray.add(String.valueOf(board.getNum()));
 				DBarray.add(board.getTag());
 				DBarray.add(board.getTitle());
@@ -94,6 +96,7 @@ public class BoardDBManageImpl implements IBoardDBManage {
 				DBarray.add(String.valueOf(board.getView()));
 				DBarray.add(String.valueOf(board.getLike()));
 				DBarray.add(board.getContent());
+				DBarray.add(String.valueOf(board.getBoardstate()));
 				System.out.println(DBarray);
 				// DATAARRAY.addAll(String.valueOf(board.getNum()), board.getTag(), board.getTitle(), board.getWriter(),board.getDate(),String.valueOf(board.getView()),String.valueOf(board.getLike()));
 				// DATAARRAY.addAll(String.valueOf(rs.getInt("Number")),rs.getString("tag"),rs.getString("title"),rs.getString("writer"),rs.getString("date"),String.valueOf(rs.getInt("view")),String.valueOf(rs.getInt("like")));

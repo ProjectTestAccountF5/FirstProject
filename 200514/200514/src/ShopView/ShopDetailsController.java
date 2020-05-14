@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import BoardEx.DB.ListController;
 import CommonService.ICommonService;
 import ShopView.Data.IProductManage;
 import ShopView.Data.ProductManageImpl;
@@ -14,6 +15,7 @@ import ShopView.Service.ShopDetailsServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -34,7 +36,7 @@ public class ShopDetailsController extends Controller implements Initializable{
 		shopDetailServ = new ShopDetailsServiceImpl();
 		productManage =new ProductManageImpl();
 		sp = new StackPane(); // 후기 게시판 호출용
-		sp.getChildren().add(comServ.Load("../../BoardEx/DB/BoardListEx.fxml"));
+
 	}
 	
 	public int isCheck() {
@@ -59,14 +61,20 @@ public class ShopDetailsController extends Controller implements Initializable{
 	}
 
 	public void reviewProc(ActionEvent e) {
+		Parent boardRoot = (Parent)comServ.Load("../../BoardEx/DB/BoardListEx.fxml");
+		ListController lstCtrler = new ListController();
+	
+		
+		sp.getChildren().add(boardRoot);
 		VBox vbox =(VBox)((Parent)e.getSource()).getParent().getParent();
-
+		sp.setId("StackPaneListView");
 		if(vbox.getChildren().contains(sp)) {
 			vbox.getChildren().remove(sp);
 			}
-		vbox.getChildren().add(sp);
-	
-		vbox.autosize();
+		lstCtrler.setRoot((Parent)sp.getChildren().get(0));
+		vbox.getChildren().add(sp); 
+		lstCtrler.setBoardState(2);
+		
 		/*BorderPane bp = (BorderPane)root;
 		bp.setLeft(null);
 		bp.setCenter(comServ.Load("../../BoardEx/DB/BoardListEx.fxml"));

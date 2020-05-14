@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import SearchItems.Controller;
+import ShopView.ShopMainController;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -45,11 +47,13 @@ public class SelectDB {
 			List<String> prdColor = new ArrayList<String>();
 			List<String> prdScore = new ArrayList<String>();
 			List<String> prdImageSrc = new ArrayList<String>();
+			List<Integer> prdOrderNum = new ArrayList<Integer>();
 
 			while (rs.next()) {
 				String prdStr;
 				String colorStr;
 				String scoreStr;
+				int prodNum;
 				if(rs.getString("dcprice").isEmpty()==false) {
 					prdStr = rs.getString("prdName")+"\nKRW "+
 							rs.getString("price")+" ¡æ "+rs.getString("dcprice");
@@ -59,12 +63,16 @@ public class SelectDB {
 				}
 				colorStr = rs.getString("color");
 				scoreStr = RatingStar(rs.getString("score"));
+				prodNum = rs.getInt("prodNum");
 				prdInfo.add(prdStr);
 				prdColor.add(colorStr);
 				prdScore.add(scoreStr);
+				prdOrderNum.add(prodNum);
 				prdImageSrc.add(rs.getString("imgsrc"));
 			}
-
+			
+			Controller ctrler = new Controller();
+			ctrler.setPrdNumLst(prdOrderNum);
 			List<ImageView> prdImage = new ArrayList<ImageView>();
 			List<Label> lblLst = new ArrayList<Label>();
 			List<HBox> hboxLst = new ArrayList<HBox>();
@@ -137,7 +145,6 @@ public class SelectDB {
 
 			rs.close();
 			pStmt.close();
-			conn.close();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

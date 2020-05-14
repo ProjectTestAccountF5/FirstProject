@@ -17,11 +17,14 @@ import CommonService.ICommonService;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.HTMLEditor;
 
 public class WriteController implements Initializable{
+	private static final String TableView = null;
 	IBoardWriteService writeserv = new BoardWriteServiceImpl();
 	ICommonService comserv = new CommonServiceImpl();
 	ListController lstCtrler = new ListController();
@@ -30,9 +33,13 @@ public class WriteController implements Initializable{
 	final int TITLE = 1;
 	final int WRITER = 2;
 	final int CONTENT = 3;
+	static int boardstate;
 	
 	public void setRoot(Parent root) {
 		this.root = root;
+	}
+	public void setBoardState(int boardstate) {
+		this.boardstate=boardstate;
 	}
 	
 	@Override
@@ -55,10 +62,18 @@ public class WriteController implements Initializable{
 	}
 	public void CancelProc(ActionEvent e) {
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
-		Parent root = comserv.Load("../BoardEx/DB/BoardListEx.fxml");
-		borderPane.setCenter(root);
+		System.out.println("보드스테이트" + boardstate);
+		root = (Parent)borderPane;
 		IBoardDBManage borman = new BoardDBManageImpl();
 		borman.ListProc();
+		System.out.println("취소 : " + root);
+		BorderPane bp = (BorderPane)root;
+		bp.setLeft(null);
+		bp.setCenter(comserv.Load("../BoardEx/DB/BoardListEx.fxml"));
+		bp.getScene().getWindow().sizeToScene();
+		ListController lstctrler =new ListController();
+		lstctrler.setRoot(root);
+		lstctrler.setBoardState(boardstate);
 	}
 	public void BoardProc(ActionEvent e) { // 작성글의 데이터를 BoardDB에 입력
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
@@ -80,6 +95,7 @@ public class WriteController implements Initializable{
 		board.setView(0);
 		board.setLike(0);
 		board.setContent(content.getHtmlText());
+		board.setBoardstate(boardstate);
 		
 		if(writeserv.BoardProc(board))
 		{	comserv.ErrorMsg("게시글", "성공", "게시글 작성 성공");

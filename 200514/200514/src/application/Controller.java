@@ -3,6 +3,7 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import BoardEx.DB.ListController;
 import CommonService.CommonServiceImpl;
 import CommonService.ICommonService;
 import ShopView.ShopMainController;
@@ -128,7 +129,9 @@ public class Controller implements Initializable {
 		bp.setLeft(null);
 		bp.setCenter(comserv.Load("../BoardEx/DB/BoardListEx.fxml"));
 		bp.getScene().getWindow().sizeToScene();
-		
+		ListController lstctrler =new ListController();
+		lstctrler.setRoot(root);
+		lstctrler.setBoardState(1);
 	}
 	public void MembershipView(ActionEvent e) {
 		MainPopupShowInit();

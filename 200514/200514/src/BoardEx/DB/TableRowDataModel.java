@@ -3,7 +3,7 @@ package BoardEx.DB;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
-public class TableRowDataModel {
+public class TableRowDataModel{
 	private IntegerProperty numList;
 	private StringProperty tagList;
 	private StringProperty titleList;

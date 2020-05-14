@@ -10,7 +10,14 @@ public class Board {
 	private int view;
 	private int like;
 	private String content;
+	private int boardstate;
 	
+	public int getBoardstate() {
+		return boardstate;
+	}
+	public void setBoardstate(int boardstate) {
+		this.boardstate = boardstate;
+	}
 	public String getContent() {
 		return content;
 	}
