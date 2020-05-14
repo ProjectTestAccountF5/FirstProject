@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="330.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="전체(itemAll)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="신상품(brandNew)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="인기(popular)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="세일(sale)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="아우터(outer)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="상의(topItem)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="하의(bottomItem)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" prefHeight="108.0" prefWidth="300.0" style="-fx-background-color: black;" text="잡화(accessories)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font></Button>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

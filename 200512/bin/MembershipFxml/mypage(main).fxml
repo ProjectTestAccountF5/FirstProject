@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="Webpage.WebController" fx:id="webMain">
+   <left>
+      <VBox prefHeight="400.0" prefWidth="119.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="ProfileEditBtn"  onAction="#ProfileView" mnemonicParsing="false"  prefHeight="29.0" prefWidth="99.0" style="-fx-background-color: BLACK;" text="개인정보 수정" textFill="WHITE" textOverrun="CLIP">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="OrderListBtn" onAction="#webpage" mnemonicParsing="false" prefHeight="29.0" prefWidth="99.0" style="-fx-background-color: BLACK;" text="주문내역 조회" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="ShoppingBasketBtn"  onAction="#basketView" mnemonicParsing="false" prefHeight="29.0" prefWidth="99.0" style="-fx-background-color: BLACK;" text="장바구니" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="LogoutBtn" onAction="#CancelProc" mnemonicParsing="false" prefHeight="29.0" prefWidth="99.0" style="-fx-background-color: BLACK;" text="로그아웃" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" top="80.0" />
+         </padding>
+      </VBox>
+   </left>
+   <top>
+      <BorderPane prefHeight="54.0" prefWidth="598.0" BorderPane.alignment="CENTER">
+         <center>
+            <Label prefHeight="59.0" prefWidth="165.0" style="-fx-font: 돋움;" text="My page" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Black" size="33.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
