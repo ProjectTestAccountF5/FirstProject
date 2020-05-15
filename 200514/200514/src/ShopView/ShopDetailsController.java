@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import BoardEx.WriteController;
 import BoardEx.DB.ListController;
 import CommonService.CommonServiceImpl;
 import CommonService.ICommonService;
@@ -24,6 +25,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
+import javafx.stage.Window;
 
 public class ShopDetailsController extends Controller implements Initializable{
 	static private Parent root;
@@ -33,9 +35,13 @@ public class ShopDetailsController extends Controller implements Initializable{
 	static private 	StackPane sp;
 	ICommonService comserv;
 	private Popup popup;
+	static private int boardstate;
 	@Override
 	public void setRoot(Parent root) {
 		this.root =root;
+	}
+	public void setBoardState(int boardstate) {
+		this.boardstate = boardstate;
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -106,10 +112,14 @@ public class ShopDetailsController extends Controller implements Initializable{
 
 	}
 	public void qnaProc(ActionEvent e) {
-
-		//	Parent s1 = (Parent)e.getSource();
-		//	HBox hbox = (HBox)s1.getParent();
-		//	VBox vbox = (VBox)hbox.getParent();
+		BorderPane borderPane = (BorderPane)comserv.getScene(e);
+		Parent root = comserv.Load("../BoardEx/BoardWriteEx.fxml");
+		borderPane.setBottom(null);
+		borderPane.setCenter(root);
+		Window window = borderPane.getScene().getWindow();
+		window.sizeToScene();
+		WriteController writectrler = new WriteController();
+		writectrler.setBoardState(boardstate);
 
 	}
 	public void buyProc() {

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import BoardEx.DB.ListController;
 import CommonService.CommonServiceImpl;
 import CommonService.ICommonService;
 import ShopView.Data.IProductManage;
@@ -48,9 +49,11 @@ public class ShopMainController extends Controller implements Initializable {
 	private ShopMainService shopMainServ;
 	private ShopDetailsService shopDetailServ;
 	private IProductManage prodManage;
+	ListController lstctrler;
 	private ObjectBinding<Bounds> bounds;
 	private String orderStr = "";
 	private static List<Integer> prdNumLst;
+	private static int boardstate;
 	iDisplayOrder displayOrder = new DisplayOrderImpl();
 	HomeController mainctrler;
 
@@ -58,7 +61,9 @@ public class ShopMainController extends Controller implements Initializable {
 	public void setRoot(Parent root) {
 		this.root = root;
 	}
-
+	public void setBoardState(int boardstate) {
+		this.boardstate = boardstate;
+	}
 	public void setPrdNumLst(List<Integer> prdNumLst) {
 		this.prdNumLst = prdNumLst;
 	}
@@ -70,6 +75,7 @@ public class ShopMainController extends Controller implements Initializable {
 		shopDetailServ = new ShopDetailsServiceImpl();
 		prodManage = new ProductManageImpl();
 		mainctrler = new HomeController();
+		lstctrler = new ListController();
 		InitialDisplay(orderStr);
 		getNode();
 	}
@@ -181,14 +187,14 @@ public class ShopMainController extends Controller implements Initializable {
 			ShopDetailsController sdctrler = new ShopDetailsController();
 			mainctrler.setScrPane(scrollPane);
 			sdctrler.setRoot(form);
-			
+			sdctrler.setBoardState(boardstate);
+
 			BorderPane detailBorderPane = (BorderPane)sp.getChildren().get(0);
 
 			BorderPane boardRootA = (BorderPane)comServ.Load("../BoardEx/DB/BoardListEx.fxml");
 			BorderPane boardRootB = (BorderPane)comServ.Load("../BoardEx/DB/BoardListEx.fxml");
 			System.out.println("πŸ≈“ bp"+detailBorderPane.getBottom());
 			HBox bottomHBox = (HBox)detailBorderPane.getBottom(); 
-			System.out.println(bottomHBox);
 			VBox leftVbox = (VBox)bottomHBox.getChildren().get(0);
 			 VBox rightVbox = (VBox)bottomHBox.getChildren().get(1); 
 			 BorderPane reviewPane = (BorderPane)leftVbox.lookup("#reviewPane"); 
@@ -196,8 +202,22 @@ public class ShopMainController extends Controller implements Initializable {
 			 System.out.println("∏Æ∫‰∆‰¿Œ: "+ reviewPane + "qna∆‰¿Œ : "+qnaPane);
 			 reviewPane.getChildren().clear();
 			 qnaPane.getChildren().clear();
-			 reviewPane.setCenter(boardRootA.getCenter());
-			 qnaPane.setCenter(boardRootB.getCenter());
+			 ScrollPane a = (ScrollPane)boardRootA.getCenter();
+			 System.out.println(a.getContent());
+			 a.getContent().setId("aTableView");
+			 reviewPane.setCenter(a);
+			 ScrollPane b = (ScrollPane)boardRootB.getCenter();
+			 b.getContent().setId("bTableView");
+			 qnaPane.setCenter(b);
+			 
+			 System.out.println("rp" + ((ScrollPane)reviewPane.getCenter()).getContent() + "qnap"   + ((ScrollPane)qnaPane.getCenter()).getContent());
+			 System.out.println(boardstate);
+			 
+			// ScrollPane sp1 = (ScrollPane)reviewPane.getCenter();
+			// ScrollPane sp2 = (ScrollPane)qnaPane.getCenter();
+			 lstctrler.setRoot((Parent)reviewPane,(Parent)qnaPane);
+			 lstctrler.setBoardState(boardstate);
+			 
 		});
 	}
 

@@ -11,7 +11,21 @@ public class Board {
 	private int like;
 	private String content;
 	private int boardstate;
+	private int prdnum;
+	private int boardtype;
 	
+	public int getBoardtype() {
+		return boardtype;
+	}
+	public void setBoardtype(int boardtype) {
+		this.boardtype = boardtype;
+	}
+	public int getPrdnum() {
+		return prdnum;
+	}
+	public void setPrdnum(int prdnum) {
+		this.prdnum = prdnum;
+	}
 	public int getBoardstate() {
 		return boardstate;
 	}

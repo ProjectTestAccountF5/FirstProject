@@ -66,13 +66,6 @@ public class BoardDBManageImpl implements IBoardDBManage {
 	public List<String> ListProc() { // 게시판에 작성되있는 글 호출
 		String sql = "SELECT * " +
 				"FROM Board ";
-		/*	String num = null;
-		String tag = null;
-		String title = null;
-		String writer = null;
-		String date = null;
-		String view = null;
-		String like = null;*/
 		List<String> DBarray = new ArrayList<String>();
 		try {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -88,6 +81,8 @@ public class BoardDBManageImpl implements IBoardDBManage {
 				board.setLike(rs.getInt("like"));
 				board.setContent(rs.getString("content"));
 				board.setBoardstate(rs.getInt("boardstate"));
+				board.setPrdnum(rs.getInt("prdnum"));
+				board.setBoardtype(rs.getInt("boardtype"));
 				DBarray.add(String.valueOf(board.getNum()));
 				DBarray.add(board.getTag());
 				DBarray.add(board.getTitle());
@@ -97,24 +92,10 @@ public class BoardDBManageImpl implements IBoardDBManage {
 				DBarray.add(String.valueOf(board.getLike()));
 				DBarray.add(board.getContent());
 				DBarray.add(String.valueOf(board.getBoardstate()));
+				DBarray.add(String.valueOf(board.getPrdnum()));
+				DBarray.add(String.valueOf(board.getBoardtype()));
 				System.out.println(DBarray);
-				// DATAARRAY.addAll(String.valueOf(board.getNum()), board.getTag(), board.getTitle(), board.getWriter(),board.getDate(),String.valueOf(board.getView()),String.valueOf(board.getLike()));
-				// DATAARRAY.addAll(String.valueOf(rs.getInt("Number")),rs.getString("tag"),rs.getString("title"),rs.getString("writer"),rs.getString("date"),String.valueOf(rs.getInt("view")),String.valueOf(rs.getInt("like")));
-				//[[3, 213, 421421, 42143214, 2020-04-29, 0, 0]], [4, 21412, 3124124, 124, 2020-04-29, 0, 0]]
 			}
-			//for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-			/*num = rs.getString(1);
-				tag = rs.getString(2);
-				title = rs.getString(3);
-				writer = rs.getString(4);
-				date = rs.getString(5);
-				view = rs.getString(6);
-				like =rs.getString(7);*/
-			/*
-
-			 * 
-			 * }
-			 */
 			pStmt.close();
 			conn.close();
 		} catch (SQLException e) {
@@ -125,30 +106,6 @@ public class BoardDBManageImpl implements IBoardDBManage {
 		return DBarray;
 
 	}
-	/*
-	 * @Override public List<String> ListProc(String str) { // 게시판에 작성되있는 글 호출
-	 * String sql = "SELECT * " + "FROM Board "; String num = null; String tag =
-	 * null; String title = null; String writer = null; String date = null; String
-	 * view = null; String like = null; List<String> DBArray = new
-	 * ArrayList<String>(); try { PreparedStatement pStmt =
-	 * conn.prepareStatement(sql);
-	 * 
-	 * ResultSet rs = pStmt.executeQuery(); for (int i = 0; i <
-	 * rs.getMetaData().getColumnCount(); i++) { num = rs.getString(1); tag =
-	 * rs.getString(2); title = rs.getString(3); writer = rs.getString(4); date =
-	 * rs.getString(5); view = rs.getString(6); like =rs.getString(7);
-	 * board.setNum(rs.getInt("Number")); board.setTag(rs.getString("tag"));
-	 * board.setTitle(rs.getString("title"));
-	 * board.setWriter(rs.getString("writer")); board.setDate(rs.getString("date"));
-	 * board.setView(rs.getInt("view")); board.setLike(rs.getInt("like"));
-	 * 
-	 * 
-	 * } pStmt.close(); conn.close(); } catch (SQLException e) { // TODO
-	 * Auto-generated catch block //e.printStackTrace(); //return result; } return
-	 * DBArray;
-	 * 
-	 * }
-	 */
 	@Override
 	public List<String> ReadProc() { // 게시판에 작성되있는 글 호출
 		ListController lstctrler = new ListController();

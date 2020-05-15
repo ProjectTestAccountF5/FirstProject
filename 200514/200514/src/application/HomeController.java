@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 public class HomeController implements Initializable {
 	ICommonService comserv;
 	WebController wbctrler;
+	ShopMainController smctrler;
 	public static String userState = null;
 	@FXML Button fullscrBtn;
 	@FXML TextField userStateTxt;
@@ -40,6 +41,8 @@ public class HomeController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		comserv = new CommonServiceImpl();
 		wbctrler = new WebController();
+		scrPane = new ScrollPane();
+		smctrler = new ShopMainController();
 		UserTextFieldControl(userState); 
 		if(!userStateTxt.getText().contentEquals("GUEST")) {
 			loginBtn.setText("LOGOUT");
@@ -110,6 +113,7 @@ public class HomeController implements Initializable {
 		this.scrPane = (ScrollPane)borderPane.getCenter();
 		setScrPane((ScrollPane)scrPane.getContent().lookup("#shopScrPane"));
 		smctrler.setRoot(shopView);
+		smctrler.setBoardState(2);
 		System.out.println(scrPane.getId());
 	}
 	public void BoardView(ActionEvent e) {
@@ -188,9 +192,9 @@ public class HomeController implements Initializable {
 		//scrollPane.setPrefSize(comserv.getScene(e).getScene().getWidth(), comserv.getScene(e).getScene().getHeight());
 		borderPane.setCenter(centerScene);
 		ctrler.setRoot(root);
+		smctrler.setBoardState(2);
 		BorderPane searchPane = (BorderPane)borderPane.getCenter();
 		setScrPane((ScrollPane)searchPane.getCenter());
-		System.out.println("너비" + scrPane.getPrefWidth()+"높이"+scrPane.getHeight());
 	}
 	public void CartView(ActionEvent e) {
 		MainPopupShowInit();
