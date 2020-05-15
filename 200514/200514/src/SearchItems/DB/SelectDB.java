@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import SearchItems.Controller;
-import ShopView.ShopMainController;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -133,10 +133,13 @@ public class SelectDB {
 					lbl.setStyle("-fx-border-color:white; -fx-background-color: olive;");
 					hbox.getChildren().add(lbl);
 				}
+				hbox.setAlignment(Pos.CENTER);
 				hboxLst.add(hbox);
 				scoreLbl.add(new Label(prdScore.get(i)));
 				scoreLbl.get(i).setTextFill(Color.ORANGE);
-				vboxLst.add(new VBox(prdImage.get(i), lblLst.get(i), hboxLst.get(i), scoreLbl.get(i)));
+				VBox resultVbox = new VBox(prdImage.get(i), lblLst.get(i), hboxLst.get(i), scoreLbl.get(i));
+				resultVbox.setAlignment(Pos.CENTER);
+				vboxLst.add(resultVbox);
 				resultGrid.add(vboxLst.get(i), i % 3, i / 3);
 			}
 

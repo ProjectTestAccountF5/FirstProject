@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller" fx:id="mainPane">
+<BorderPane fx:id="mainPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
    <top>
       <HBox spacing="20.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +29,7 @@
                </font></Button>
             <StackPane prefHeight="108.0" prefWidth="300.0">
                <children>
-                  <TextField fx:id="userStateTxt" alignment="CENTER" editable="false" >
+                  <TextField fx:id="userStateTxt" alignment="CENTER" editable="false">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -80,7 +80,4 @@
          </padding>
       </VBox>
    </right>
-   <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>

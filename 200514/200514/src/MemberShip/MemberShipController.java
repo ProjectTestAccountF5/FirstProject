@@ -9,7 +9,7 @@ import CommonService.ICommonService;
 import MemberShip.DB.IMemberShipDBManage;
 import MemberShip.DB.Member;
 import MemberShip.DB.MemberShipDBManageImpl;
-import application.Controller;
+import application.HomeController;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -20,7 +20,7 @@ import javafx.scene.layout.BorderPane;
 
 public class MemberShipController implements Initializable{
 	ICommonService comServ;
-	Controller ctrler;
+	HomeController ctrler;
 	IMemberShipDBManage memberManage;
 	final int ID = 0;
 	final int NAME = 1;
@@ -31,7 +31,7 @@ public class MemberShipController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comServ = new CommonServiceImpl();
-		ctrler = new Controller();
+		ctrler = new HomeController();
 		memberManage = new MemberShipDBManageImpl();
 		
 	}

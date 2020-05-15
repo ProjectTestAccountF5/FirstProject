@@ -216,6 +216,7 @@ public class BoardDBManageImpl implements IBoardDBManage {
 			pstmt.setString(3, number);
 			// update 
 			pstmt.executeUpdate();
+			pstmt.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

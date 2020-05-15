@@ -8,7 +8,7 @@ import CommonService.ICommonService;
 import MemberShip.DB.IMemberShipDBManage;
 import MemberShip.DB.MemberShipDBManageImpl;
 import Webpage.WebController;
-import application.Controller;
+import application.HomeController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -70,7 +70,7 @@ public class LoginController implements Initializable{
 		borderPane.setBottom(null);
 	}
 	public void ExitProc(ActionEvent e) {
-		Controller ctrler = new Controller();
+		HomeController ctrler = new HomeController();
 		ctrler.HomeView();
 		System.out.println("홈으로");
 
@@ -107,7 +107,7 @@ public class LoginController implements Initializable{
 				});
 				vbox.getChildren().addAll(txtlbl,successBtn);
 				stackpane.getChildren().add(vbox);
-				popup = comServ.showPopUp(root.getScene(),"알림", stackpane);
+				popup = comServ.showAlertPopUp(root.getScene(),"알림", stackpane);
 
 				recentUser = idTxt.getText();
 				wbctrler.setUser(recentUser);
@@ -135,7 +135,7 @@ public class LoginController implements Initializable{
 				});
 				vbox.getChildren().addAll(txtlbl,failBtn);
 				stackpane.getChildren().add(vbox);
-				popup = comServ.showPopUp(root.getScene(),"알림", stackpane);
+				popup = comServ.showAlertPopUp(root.getScene(),"알림", stackpane);
 				idTxt.clear();
 				idTxt.requestFocus();
 				pwTxt.clear();
@@ -159,7 +159,7 @@ public class LoginController implements Initializable{
 			});
 			vbox.getChildren().addAll(txtlbl,failBtn);
 			stackpane.getChildren().add(vbox);
-			popup = comServ.showPopUp(root.getScene(),"알림", stackpane);
+			popup = comServ.showAlertPopUp(root.getScene(),"알림", stackpane);
 			idTxt.clear();
 			idTxt.requestFocus();
 			pwTxt.clear();
@@ -168,7 +168,7 @@ public class LoginController implements Initializable{
 		}
 	}
 	public void CancelProc(ActionEvent e) {
-		Controller ctrler = new Controller();
+		HomeController ctrler = new HomeController();
 		ctrler.LoginView(e);
 
 	}

@@ -7,22 +7,26 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" prefHeight="1910.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopView.ShopDetailsController">
+<BorderPane prefHeight="1910.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopView.ShopDetailsController">
    <bottom>
-      <HBox prefHeight="513.0" prefWidth="600.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="513.0" prefWidth="600.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox>
+            <VBox prefWidth="900.0">
                <children>
                   <HBox prefHeight="24.0" prefWidth="290.0">
                      <children>
-                        <Label prefHeight="15.0" prefWidth="53.0" text="REVIEW">
+                        <Label prefHeight="20.0" prefWidth="71.0" text="REVIEW">
                            <HBox.margin>
                               <Insets top="3.0" />
                            </HBox.margin>
-                        </Label>
-                        <Button fx:id="reviewBtn" alignment="CENTER" mnemonicParsing="false" onAction="#reviewProc" prefHeight="20.0" prefWidth="78.0" style="-fx-background-color: white; -fx-border-color: lightgray;" text="후기 작성">
                            <font>
-                              <Font name="Malgun Gothic" size="11.0" />
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="38.0" prefWidth="552.0" />
+                        <Button fx:id="reviewBtn" alignment="CENTER" mnemonicParsing="false" onAction="#reviewProc" prefHeight="38.0" prefWidth="108.0" style="-fx-background-color: white; -fx-border-color: lightgray;" text="후기 작성">
+                           <font>
+                              <Font name="Malgun Gothic" size="16.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="130.0" />
@@ -33,25 +37,25 @@
                         <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <Label prefHeight="14.0" prefWidth="275.0" style="-fx-background-color: WHITE; -fx-border-color: LIGHTGRAY;">
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
+                  <BorderPane fx:id="reviewPane" prefHeight="455.0" prefWidth="890.0" />
                </children>
             </VBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="122.0" prefWidth="294.0">
+            <VBox prefHeight="122.0" prefWidth="900.0">
                <children>
                   <HBox prefHeight="24.0" prefWidth="290.0">
                      <children>
-                        <Label prefHeight="15.0" prefWidth="53.0" text="Q&amp;A">
+                        <Label prefHeight="15.0" prefWidth="71.0" text="Q&amp;A">
                            <HBox.margin>
                               <Insets top="3.0" />
                            </HBox.margin>
-                        </Label>
-                        <Button fx:id="qnaBtn" alignment="CENTER" mnemonicParsing="false" onAction="#qnaProc" prefHeight="20.0" prefWidth="78.0" style="-fx-background-color: white; -fx-border-color: lightgray;" text="문의 작성">
                            <font>
-                              <Font name="Malgun Gothic" size="11.0" />
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="38.0" prefWidth="552.0" />
+                        <Button fx:id="qnaBtn" alignment="CENTER" mnemonicParsing="false" onAction="#qnaProc" prefHeight="20.0" prefWidth="108.0" style="-fx-background-color: white; -fx-border-color: lightgray;" text="문의 작성">
+                           <font>
+                              <Font name="Malgun Gothic" size="16.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="130.0" />
@@ -62,11 +66,7 @@
                         <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <Label prefHeight="14.0" prefWidth="275.0" style="-fx-background-color: WHITE; -fx-border-color: LIGHTGRAY;">
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
+                  <BorderPane fx:id="qnaPane" prefHeight="455.0" prefWidth="890.0" />
                </children>
             </VBox>
          </children>
@@ -77,7 +77,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="580.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="detailImgView" fitHeight="1111.0" fitWidth="763.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="detailImgView" fitHeight="4000.0" fitWidth="1300.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../DetailImg/wonderland%20스트라이프%20니트.jpg" />
                </image>
@@ -85,11 +85,11 @@
          </children></VBox>
    </center>
    <top>
-      <VBox prefHeight="302.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="302.0" prefWidth="1800.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1800.0" spacing="20.0">
                <children>
-                  <ImageView fx:id="prdImgView" fitHeight="262.0" fitWidth="316.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="prdImgView" fitHeight="600.0" fitWidth="840.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../ImgSource/TOP/wonderland%20스트라이프%20니트.jpg" />
                      </image>
@@ -127,7 +127,7 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="88.0" prefWidth="55.0" style="-fx-border-color: black;" text="Price">
+                              <Label alignment="CENTER" prefHeight="88.0" prefWidth="72.0" style="-fx-border-color: black;" text="Price">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -165,7 +165,8 @@
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding></VBox>
+                     </padding>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets />

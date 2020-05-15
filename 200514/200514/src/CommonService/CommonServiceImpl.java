@@ -2,9 +2,12 @@ package CommonService;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import ShopView.Controller;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -24,6 +27,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class CommonServiceImpl implements ICommonService{
@@ -94,6 +98,54 @@ public class CommonServiceImpl implements ICommonService{
 			popup.hide();
 		return popup;
 	}
+	@Override
+	public Popup showAlertPopUp(Scene scene, String title, Node node) {
+		popup = new Popup();
+		ScrollPane sp = new ScrollPane();
+		sp.setContent(Load("../application/PopUp.fxml"));
+		BorderPane container = new BorderPane();
+        container.setStyle("-fx-background-color : white;");
+        StackPane titleStackPane = new StackPane();
+        titleStackPane.setStyle("-fx-background-color: steelblue;");
+        Text titlePopUp = new Text(title);
+        titlePopUp.setFont(new Font(40));
+        titlePopUp.setStyle("-fx-fill : white");
+        titleStackPane.getChildren().add(titlePopUp);
+        titleStackPane.setPrefHeight(40);
+        sp.setContent(node);
+        container.setTop(titleStackPane);
+        container.setCenter(sp);
+
+        // Dragging implementation:
+
+        ObjectProperty<Point2D> mouseLocation = new SimpleObjectProperty<>();
+
+        container.setOnMousePressed(event -> 
+            mouseLocation.set(new Point2D(event.getScreenX(), event.getScreenY())));
+
+        container.setOnMouseDragged(event -> {
+            if (mouseLocation.get() != null) {
+                double x = event.getScreenX();
+                double deltaX = x - mouseLocation.get().getX() ;//x좌표의 변화량
+                double y = event.getScreenY();
+                double deltaY = y - mouseLocation.get().getY() ;//y좌표의 변화량
+                //in case of 2 or more computer screens this help me to avoid get stuck on 1 screen
+                if(Math.abs(popup.getX()-x)>popup.getWidth()){
+                   popup.setX(x);
+                   popup.setY(y);
+                }else {
+                popup.setX(popup.getX() + deltaX);//기존x좌표 + 마우스 드래그한 위치의 x좌표의 변화량
+                popup.setY(popup.getY() + deltaY);//기존Y좌표 + 마우스 드래그한 위치의 Y좌표의 변화량
+                }
+                mouseLocation.set(new Point2D(x, y));
+            }
+        });
+        container.setOnMouseReleased(event -> mouseLocation.set(null));
+        Window window = scene.getWindow();
+        popup.getScene().setRoot(container);
+        popup.show(window);
+		return popup;
+	}
 
 	@Override
 	public Parent getScene(ActionEvent e) {
@@ -135,13 +187,37 @@ public class CommonServiceImpl implements ICommonService{
 		}
 		return txtFldMap;
 	}
+	
 	@Override
-	public void ErrorMsg(String title, String headerStr, String ContentTxt) {
-		// TODO Auto-generated method stub
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle(title);
-		alert.setHeaderText(headerStr);
-		alert.setContentText(ContentTxt);
-		alert.showAndWait();
+	public Parent showWindow(Stage s, String formPath) {
+//		ScrollPane sp =new ScrollPane();
+		FXMLLoader loader =new FXMLLoader(getClass().getResource(formPath));
+		Parent root =null;
+		try {
+			root=loader.load();
+//			sp.setContent(root);
+			s.setScene(new Scene(root));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+		Controller ctrler =loader.getController();
+		ctrler.setRoot(root);
+		
+		s.show();
+		
+		return root;
 	}
+
+	@Override
+	public List<String> DivideCom(String str) {
+		List<String> com = new ArrayList<String>();
+		String [] result = str.split(",");
+		
+//		System.out.println(result);
+		for(int i=0;i<result.length;i++)
+			com.add(result[i]);
+		return com;
+	}
+
 }

@@ -18,13 +18,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-public class Controller implements Initializable {
+public class HomeController implements Initializable {
 	ICommonService comserv;
 	WebController wbctrler;
 	public static String userState = null;
@@ -105,19 +104,13 @@ public class Controller implements Initializable {
 		MainPopupShowInit();
 		
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
-		Parent leftScene = comserv.Load("../ShopView/shopView.fxml");	
-		scrPane = new ScrollPane();
-		scrPane.setContent(leftScene);
-		//borderPane.setLeft(leftScene);
-
-		//BorderPane contentPane = new BorderPane();
-		//scr.setOrientation(Orientation.VERTICAL);
-		scrPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-		scrPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		scrPane.setContent(leftScene);
-		borderPane.setCenter(scrPane);
+		Parent shopView = comserv.Load("../ShopView/shopView.fxml");
+		borderPane.setCenter(shopView);
 		ShopMainController smctrler = new ShopMainController();
-		smctrler.setRoot(leftScene);
+		this.scrPane = (ScrollPane)borderPane.getCenter();
+		setScrPane((ScrollPane)scrPane.getContent().lookup("#shopScrPane"));
+		smctrler.setRoot(shopView);
+		System.out.println(scrPane.getId());
 	}
 	public void BoardView(ActionEvent e) {
 		MainPopupShowInit();
@@ -164,17 +157,17 @@ public class Controller implements Initializable {
 		 */
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
 		Parent centerScene = comserv.Load("../MembershipFxml/loginform.fxml");
-		AnchorPane anchorpane = new AnchorPane();
-		Pane pane = new Pane();
+		
+		StackPane pane = new StackPane();
 		pane.getChildren().add(centerScene);
-		pane.setPrefSize(450, 300);
-		anchorpane.getChildren().add(pane);
-		anchorpane.getChildren().get(0).setLayoutX(620);
-		anchorpane.getChildren().get(0).setLayoutY(300);
+		pane.setPrefSize(1800, 932);
+		scrPane.setContent(pane);
+		scrPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+		scrPane.setVbarPolicy(ScrollBarPolicy.NEVER);
 		//StackPane sp = new StackPane();
 		//sp.getChildren().add(centerScene);
 		borderPane.setLeft(null);
-		borderPane.setCenter(anchorpane);
+		borderPane.setCenter(scrPane);
 		borderPane.setBottom(null);
 		if(userStateTxt.getText()!="GUEST") {
 			userState = "GUEST";
@@ -189,15 +182,15 @@ public class Controller implements Initializable {
 		
 		BorderPane borderPane = (BorderPane)comserv.getScene(e);
 		borderPane.setLeft(null);
-		borderPane.setCenter(null);
 		borderPane.setBottom(null);
 		Parent centerScene = comserv.Load("../SearchItems/searchwindow.fxml");
-		ScrollPane scrollPane = new ScrollPane();
-
+		
 		//scrollPane.setPrefSize(comserv.getScene(e).getScene().getWidth(), comserv.getScene(e).getScene().getHeight());
-		scrollPane.setContent(centerScene);
-		borderPane.setCenter(scrollPane);
+		borderPane.setCenter(centerScene);
 		ctrler.setRoot(root);
+		BorderPane searchPane = (BorderPane)borderPane.getCenter();
+		setScrPane((ScrollPane)searchPane.getCenter());
+		System.out.println("너비" + scrPane.getPrefWidth()+"높이"+scrPane.getHeight());
 	}
 	public void CartView(ActionEvent e) {
 		MainPopupShowInit();
@@ -207,10 +200,10 @@ public class Controller implements Initializable {
 		wbctrler.basketView(e);
 
 	}
-	public void TopView(ActionEvent e) {
+	public void TopView() {
 		scrPane.setVvalue(0);
 	}
-	public void BottomView(ActionEvent e) {
+	public void BottomView() {
 		scrPane.setVvalue(100);
 	}
 
@@ -222,6 +215,9 @@ public class Controller implements Initializable {
 		System.out.println(user);
 		String state = user;
 		UserTextFieldControl(state);
+	}
+	public void setScrPane(ScrollPane scrpane) {
+		this.scrPane = scrpane;
 	}
 
 }

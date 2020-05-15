@@ -6,16 +6,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import CommonService.CommonServiceImpl;
+import CommonService.ICommonService;
 import ShopView.Data.IProductManage;
 import ShopView.Data.ProductManageImpl;
-import ShopView.Service.CommonService;
-import ShopView.Service.CommonServiceImpl;
 import ShopView.Service.DisplayOrderImpl;
 import ShopView.Service.ShopDetailsService;
 import ShopView.Service.ShopDetailsServiceImpl;
 import ShopView.Service.ShopMainService;
 import ShopView.Service.ShopMainServiceImpl;
 import ShopView.Service.iDisplayOrder;
+import application.HomeController;
 import javafx.beans.binding.ObjectBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,9 +26,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class ShopMainController extends Controller implements Initializable {
@@ -40,7 +44,7 @@ public class ShopMainController extends Controller implements Initializable {
 	@FXML
 	Button prdBtn2;
 	static private Parent root;
-	private CommonService comServ;
+	private ICommonService comServ;
 	private ShopMainService shopMainServ;
 	private ShopDetailsService shopDetailServ;
 	private IProductManage prodManage;
@@ -48,12 +52,13 @@ public class ShopMainController extends Controller implements Initializable {
 	private String orderStr = "";
 	private static List<Integer> prdNumLst;
 	iDisplayOrder displayOrder = new DisplayOrderImpl();
+	HomeController mainctrler;
 
 	@Override
 	public void setRoot(Parent root) {
 		this.root = root;
 	}
-	
+
 	public void setPrdNumLst(List<Integer> prdNumLst) {
 		this.prdNumLst = prdNumLst;
 	}
@@ -64,6 +69,7 @@ public class ShopMainController extends Controller implements Initializable {
 		shopMainServ = new ShopMainServiceImpl();
 		shopDetailServ = new ShopDetailsServiceImpl();
 		prodManage = new ProductManageImpl();
+		mainctrler = new HomeController();
 		InitialDisplay(orderStr);
 		getNode();
 	}
@@ -75,7 +81,7 @@ public class ShopMainController extends Controller implements Initializable {
 		location.addAll(pos);
 //		for (int i = 0; i < pos.size(); i++)
 //			System.out.println("pos " + i + " : " + pos.get(i));
-		
+
 		List<ProductInfo> lstProdInfo = new ArrayList<ProductInfo>();
 		lstProdInfo.addAll(prodManage.getProductInfo(prdNumLst.get(pos.get(0))));
 		Parent form = shopMainServ.OpenPrdDetails(); // shopMainServiceImpl
@@ -96,6 +102,12 @@ public class ShopMainController extends Controller implements Initializable {
 				"#dcpriceLbl");
 		shopDetailServ.AddImgView(form, "DetailImg/" + lstProdInfo.get(0).getImgdetail(), "#detailImgView");// 상세사진
 		shopDetailServ.AddImgView(form, "ImgSource/" + lstProdInfo.get(0).getImgsrc(), "#prdImgView");// 대표사진
+		/*
+		 * ImageView prdiv = (ImageView)form.lookup("#prdImgView");
+		 * prdiv.setFitWidth(840); prdiv.setFitHeight(600); ImageView detailiv =
+		 * (ImageView)form.lookup("#detailImgView"); detailiv.setFitHeight(4000);
+		 * detailiv.setFitWidth(1300);
+		 */
 		return form;
 
 	}
@@ -157,13 +169,35 @@ public class ShopMainController extends Controller implements Initializable {
 				System.out.println("row : " + row);
 			}
 			Parent form = OpenPrdDetails(pos);
-			
+			StackPane sp = new StackPane();
+			sp.setPrefWidth(1800);
+			sp.getChildren().add(form);
 			GridPane bp = (GridPane)e.getSource();
 			BorderPane borderpane = (BorderPane)bp.getScene().getRoot();
 			scrollPane = (ScrollPane)borderpane.getCenter();
-			scrollPane.setContent(form);
+			scrollPane.setContent(sp);
+			scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+			scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 			ShopDetailsController sdctrler = new ShopDetailsController();
+			mainctrler.setScrPane(scrollPane);
 			sdctrler.setRoot(form);
+			
+			BorderPane detailBorderPane = (BorderPane)sp.getChildren().get(0);
+
+			BorderPane boardRootA = (BorderPane)comServ.Load("../BoardEx/DB/BoardListEx.fxml");
+			BorderPane boardRootB = (BorderPane)comServ.Load("../BoardEx/DB/BoardListEx.fxml");
+			System.out.println("바텀 bp"+detailBorderPane.getBottom());
+			HBox bottomHBox = (HBox)detailBorderPane.getBottom(); 
+			System.out.println(bottomHBox);
+			VBox leftVbox = (VBox)bottomHBox.getChildren().get(0);
+			 VBox rightVbox = (VBox)bottomHBox.getChildren().get(1); 
+			 BorderPane reviewPane = (BorderPane)leftVbox.lookup("#reviewPane"); 
+			 BorderPane qnaPane =(BorderPane)rightVbox.lookup("#qnaPane"); 
+			 System.out.println("리뷰페인: "+ reviewPane + "qna페인 : "+qnaPane);
+			 reviewPane.getChildren().clear();
+			 qnaPane.getChildren().clear();
+			 reviewPane.setCenter(boardRootA.getCenter());
+			 qnaPane.setCenter(boardRootB.getCenter());
 		});
 	}
 

@@ -6,14 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.sun.webkit.ContextMenu.ShowContext;
-
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import CommonService.CommonServiceImpl;
+import CommonService.ICommonService;
 import SearchItems.DB.SelectDB;
 import SearchItems.Service.DetailSearchImpl;
 import SearchItems.Service.DisplayOrderImpl;
@@ -26,12 +20,21 @@ import ShopView.ShopDetailsController;
 import ShopView.ShopMainController;
 import ShopView.Data.IProductManage;
 import ShopView.Data.ProductManageImpl;
-import ShopView.Service.CommonService;
-import ShopView.Service.CommonServiceImpl;
 import ShopView.Service.ShopDetailsService;
 import ShopView.Service.ShopDetailsServiceImpl;
 import ShopView.Service.ShopMainService;
 import ShopView.Service.ShopMainServiceImpl;
+import application.HomeController;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class Controller implements Initializable {
 	@FXML
@@ -44,8 +47,9 @@ public class Controller implements Initializable {
 	ShopMainController shopmain;
 	ShopMainService shopMainServ;
 	ShopDetailsController sdctrler;
+	HomeController homectrler;
 	static private Parent root;
-	private CommonService comServ;
+	private ICommonService comServ;
 	private ShopDetailsService shopDetailServ;
 	private String keyword;
 	private String searchCat = "";
@@ -73,6 +77,7 @@ public class Controller implements Initializable {
 		shopmain = new ShopMainController();
 		shopMainServ = new ShopMainServiceImpl();
 		shopDetailServ = new ShopDetailsServiceImpl();
+		homectrler = new HomeController();
 		getNode();
 	}
 
@@ -146,7 +151,27 @@ public class Controller implements Initializable {
 		ScrollPane sp = new ScrollPane();
 		sp.setContent(form);
 		mainBorderPane.setCenter(sp);
+		homectrler.setScrPane(sp);
 		sdctrler.setRoot(root);
+		
+		BorderPane detailBorderPane = (BorderPane)sp.getContent();
+
+		BorderPane boardRootA = (BorderPane)comServ.Load("../BoardEx/DB/BoardListEx.fxml");
+		BorderPane boardRootB = (BorderPane)comServ.Load("../BoardEx/DB/BoardListEx.fxml");
+		System.out.println("πŸ≈“ bp"+detailBorderPane.getBottom());
+		HBox bottomHBox = (HBox)detailBorderPane.getBottom(); 
+		System.out.println(bottomHBox);
+		VBox leftVbox = (VBox)bottomHBox.getChildren().get(0);
+		 VBox rightVbox = (VBox)bottomHBox.getChildren().get(1); 
+		 BorderPane reviewPane = (BorderPane)leftVbox.lookup("#reviewPane"); 
+		 BorderPane qnaPane =(BorderPane)rightVbox.lookup("#qnaPane"); 
+		 System.out.println("∏Æ∫‰∆‰¿Œ: "+ reviewPane + "qna∆‰¿Œ : "+qnaPane);
+		 reviewPane.getChildren().clear();
+		 qnaPane.getChildren().clear();
+		 reviewPane.setCenter(boardRootA.getCenter());
+		 qnaPane.setCenter(boardRootB.getCenter());
+		
+		
 
 	}
 
